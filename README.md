@@ -1,5 +1,7 @@
 ---Package QtAC---
 
+QtAC provides tools to analyze the maturation process of complex systems in the sense of Gunderson's and Holling's adaptive cycle metaphor (see e.g. Holling 2001). Using time series of a system's components' abundance data, the dynamics of information transfer among the components are estimated. On the basis of the resulting information networks, potential, connectedness, and resilience can be computed. The development of these three variables deﬁnes the system's course through the adaptive cycle. In addition to the functions needed to carry out the justdescribbed calculations, the package offers several options to visualize the results. The main function requires a transfer entropy estimator being included in the JIDT toolkit (Lizier 2014). Besides, functions of the packages pracma, rJava, igraph, and rgl are used.
+
 
 ESSENTIAL SOFTWARE:
 
