@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1598698411477.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "265008164",
+    "id" : "DA2C61F6",
+    "lastKnownWriteTime" : 1598699554,
+    "last_content_update" : 1598699554893,
+    "path" : "~/QtAC/R/QtAC_package.R",
+    "project_path" : "R/QtAC_package.R",
+    "properties" : {
+        "cursorPosition" : "517,436",
+        "scrollLine" : "512"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
