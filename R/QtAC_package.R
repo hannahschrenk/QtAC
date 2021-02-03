@@ -59,11 +59,11 @@ if (col_names == FALSE){
     Data <- read.table(filename, col.names = paste0("t", seq(1,number_col)), check.names = FALSE, sep = "\t")
     num_sp <- seq(1,nrow(Data))
     names_sp <- paste("C",num_sp,sep="_")
-    row.names(Data) <- names_sp
+    rownames(Data) <- names_sp
  }
  if (row_names == TRUE){
     Data <- read.table(filename, col.names = paste0("t", seq(0,number_col-1)), check.names = FALSE, sep = "\t")
-    row.names(Data) <- Data[,1]
+    rownames(Data) <- Data[,1]
     Data <- Data[,-1]
   }
  }
@@ -75,13 +75,13 @@ if (col_names == TRUE){
  if (row_names == FALSE){
     num_sp <- seq(1,nrow(Data))
     names_sp <- paste("C",num_sp,sep="_")
-    row.names(Data) <- names_sp
-    col.names(Data) <- Data[1,]
+    rownames(Data) <- names_sp
+    colnames(Data) <- Data[1,]
     Data <- Data[-1,]
  }
  if (row_names == TRUE){
-    row.names(Data) <- Data[,1]
-    col.names(Data) <- Data[1,]
+    rownames(Data) <- Data[,1]
+    colnames(Data) <- Data[1,]
     Data <- Data[,-1]
     Data <- Data[-1,]
   }
@@ -131,7 +131,7 @@ QtAC <- function(Data, num_timepoints = 5,JavaPath,num_PermCheck=1000L,k=1L,k_ta
 
 
     for (num_dataset in 1:length(DataSet)){
-      adj_sign <- .QtAC.Kraskov(DataSet[[num_dataset]],num_species,num_PermCheck,k,k_tau,l,l_tau,delay, row.names(Data),JavaPath = JavaPath)
+      adj_sign <- .QtAC.Kraskov(DataSet[[num_dataset]],num_species,num_PermCheck,k,k_tau,l,l_tau,delay, rownames(Data),JavaPath = JavaPath)
       adjacent_matrices[[num_dataset]] <- adj_sign[[1]]
       significance_matrices[[num_dataset]] <- adj_sign[[2]]
 
