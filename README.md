@@ -4,9 +4,9 @@ QtAC provides tools to analyze the maturation process of complex systems in the 
 
 ESSENTIAL SOFTWARE:
 
-R (https://www.r-project.org/)
-Perl (https://www.perl.org/get.html)
-install_packages_QtAC.R
+* R (https://www.r-project.org/)
+* Perl (https://www.perl.org/get.html)
+* install_packages_QtAC.R
 
 INSTALLING PROCESS:
 
