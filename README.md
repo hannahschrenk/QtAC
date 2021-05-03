@@ -27,4 +27,4 @@ library(QtAC)
 ```
 SUPPLEMENTARY MATERIAL:
 
-The QtAC folder contains a manual "QtAC_0.1.0.pdf" describing the main functions. Required additional packages can be installed via "install_packages_QtAC.R". An example application to a bacterial community can be found in the subfolder "Example". The subfolder "dist" contains the file "MTinfodynamics.jar" which is necessary to run the main function QtAC. 
+The QtAC folder contains a manual "QtAC_0.1.0.pdf" describing the main functions. Additionally required packages can be installed via "install_packages_QtAC.R". An example application to a bacterial community can be found in the subfolder "Example". The subfolder "dist" contains the file "MTinfodynamics.jar" which is necessary to run the main function QtAC. 
