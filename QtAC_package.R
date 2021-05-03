@@ -195,6 +195,7 @@ QtAC <- function(data, num_timepoints,javapath,num_permcheck=1000L,k=1L,k_tau=1L
   rJava::.jaddClassPath(JavaPath)
   Submtx_java <- rJava::.jarray(Submatrix, dispatch = TRUE)
   teCalc<-rJava::.jnew("mtinfodynamics/RunTransferEntropyCalculatorKraskov")
+  rJava::.jcall(teCalc,"V","setProperty", "NOISE_LEVEL_TO_ADD", "0")
   rJava::.jcall(teCalc,"V","initialise",k,k_tau,l,l_tau,delay,num_PermCheck)
   rJava::.jcall(teCalc,"V","runTEKraskov",Submtx_java)
   result_Adj <-  rJava::.jcall(teCalc,"[[D",method = "getResults")
@@ -555,7 +556,7 @@ QtAC.network <- function(result_mtx,num_mtx,edge_label = FALSE,dec = 2, layout =
   if(save){
     filename <- paste(filename,'.png',sep='')
     png(filename,width = 800 ,height= 800,units = "px",type = "cairo")
-    igraph::plot.igraph(graph_adj_mtx,layout=layout_graph, vertex.label = vertex_label, vertex.label.color = "black",vertex.color = col_node,edge.label = edge_label, edge.label.font= 2, edge.arrow.size =igraph::E(graph_adj_mtx)$weight/max(igraph::E(graph_adj_mtx)$weight)*arrow_width, edge.width=igraph::E(graph_adj_mtx)$weight/max(igraph::E(graph_adj_mtx)$weight)*edge_width, vertex.label.cex = 1, margin = 0, vertex.label.font=2, edge.curved= 0.1 , edge.color= col_edge, asp= 1)
+    igraph::plot.igraph(graph_adj_mtx,layout=layout_graph, vertex.label = vertex_label, vertex.label.color = "black",vertex.color = col_node,edge.label = edge_label, edge.label.font= 2, edge.arrow.size =igraph::E(graph_adj_mtx)$weight/max(igraph::E(graph_adj_mtx)$weight)*arrow_width, edge.width=igraph::E(graph_adj_mtx)$weight/max(igraph::E(graph_adj_mtx)$weight)*edge_width, vertex.label.cex = 5, margin = 0, vertex.label.font=2, edge.curved= 0.1 , edge.color= col_edge, asp= 1)
     title(title, cex.main = 3)
     dev.off()
   }
@@ -568,9 +569,9 @@ QtAC.network <- function(result_mtx,num_mtx,edge_label = FALSE,dec = 2, layout =
 #----------------------------------------------------------------
 #' 2dplot
 #'
-#' This function plots graphs of potential, connectedness and resilience with respect to time.
+#' This function plots potential, connectedness and resilience with respect to time. Curves are interpolated via a piecewise cubic spline.
 #' @export
-#' @param mat dataframe containing the systemic variables
+#' @param mat dataframe containing a time series of systemic variables
 #' @param prop If prop = NULL, the three systemic variables are plotted w.r.t time in one plot each. If prop = "potential", "connectedness", or "resilience", only the selected systemic variable is plotted w.r.t time.
 #' @param time_int vector containing start time, end time, and step size to define the xaxis
 #' @param time unit (i.e. "years", "steps",...)
@@ -642,7 +643,7 @@ QtAC.2dplot <- function(mat,prop = NULL, time_int = NULL, time = "time", save = 
 }
 
 #------------------------------Potentialplot------------------------------
-# This function plots the potential w.r.t time. It is used in QtAC.2dplot.
+# This function plots the potential w.r.t time. It is used in QtAC.2dplot. A curve is interpolated via a piecewise cubic spline.
 
 .QtAC.potentialplot <- function(vec, time_int = NULL,names = seq(1,length(vec),1),time = "time",save,filename){
 
@@ -687,8 +688,8 @@ QtAC.2dplot <- function(mat,prop = NULL, time_int = NULL, time = "time", save = 
     png(filename,width = 800 ,height= 800,units = "px",type = "cairo")
 
     plot(xaxis_plot_spl,vec_ext,type = "l",col = "darkgreen",col.main = "darkblue",xlab = "", ylab = "", lwd = 3, axes = FALSE, frame.plot = TRUE)
-    axis(side = 1, at = xaxis_values, labels = names, col.axis = "darkblue", cex.axis = 2)
-    axis(side = 2, col.axis = "darkblue", cex.axis = 2)
+    axis(side = 1, at = xaxis_values, labels = names, col.axis = "darkblue", cex.axis = 5)
+    axis(side = 2, col.axis = "darkblue", cex.axis = 5)
     mtext(time,side = 1,line = 3, col = "darkblue", font = 2, cex = 2)
     mtext("potential",side = 2,line = 3, col = "darkgreen", font = 2, cex = 2)
     dev.off()
@@ -703,7 +704,7 @@ QtAC.2dplot <- function(mat,prop = NULL, time_int = NULL, time = "time", save = 
 }
 
 #--------------------------Connectednessplot-------------------------
-# This function plots the connectedness w.r.t time. It is used in QtAC.2dplot.
+# This function plots the connectedness w.r.t time. It is used in QtAC.2dplot. A curve is interpolated via a piecewise cubic spline.
 
 .QtAC.connectednessplot <- function(vec, time_int = NULL,names = seq(1,length(vec),1),time = "time",save,filename){
 
@@ -764,7 +765,7 @@ QtAC.2dplot <- function(mat,prop = NULL, time_int = NULL, time = "time", save = 
 }
 
 #-----------------------------Resilienceplot-----------------------------
-# This function plots the resilience w.r.t time. It is used in QtAC.2dplot.
+# This function plots the resilience w.r.t time. It is used in QtAC.2dplot. A curve is interpolated via a piecewise cubic spline.
 
 .QtAC.resilienceplot <- function(vec, time_int = NULL,names = seq(1,length(vec),1), time = "time",save,filename){
 
@@ -826,9 +827,9 @@ QtAC.2dplot <- function(mat,prop = NULL, time_int = NULL, time = "time", save = 
 #-------------------------------------------------------------------
 #' 2dmixplot
 #'
-#' This function plots two selected systemic variables w.r.t. each other.
+#' This function plots two selected systemic variables w.r.t. each other. A curve interpolated via a piecewise cubic spline.
 #' @export
-#' @param Mat data frame containing the systemic variables
+#' @param Mat data frame containing a time series of systemic variables
 #' @param prop1 variable on x-axis ("potential","connectedness","resilience")
 #' @param prop2 variable on y-axis ("potential","connectedness","resilience")
 #' @param save If Save = TRUE, the 2D plot will be saved in a PNG file.
@@ -919,9 +920,9 @@ QtAC.2dmixplot <- function(mat,prop1, prop2,save = FALSE,filename = paste("2dmix
 #-------------------------------------------------------------
 #' 3dplot
 #'
-#' 3D plot of the three systemic variables w.r.t each other.
+#' 3D plot of the three systemic variables w.r.t each other. A curve is interpolated via a piecewise cubic spline.
 #' @export
-#' @param Mat data frame containing the three systemic variables
+#' @param Mat data frame containing a time series of the three systemic variables
 #' @param mat_points If mat_points = TRUE, the maturation points are visible.
 #' @return 3D plot
 # @examples
@@ -954,7 +955,8 @@ QtAC.3dplot <- function(mat,mat_points=FALSE){
   }
   else pointsize <- 0
 
-  rgl::plot3d(mat[,1], mat[,3], mat[,2], pch=19, cex=0.25, size=pointsize,type = "s", col="black",xlab = "potential",ylab = "resilience",zlab = "connectedness")
+  # rgl::plot3d(mat[,1], mat[,3], mat[,2], pch=19, cex=0.25, size=pointsize,type = "s", col="black",xlab = "potential",ylab = "resilience",zlab = "connectedness")
+  rgl::plot3d(mat[,1], mat[,3], mat[,2], pch=19, cex=0.25, size=pointsize,type = "s", col="black",xlab = "",ylab = "",zlab = "")
   rgl::text3d(mat[,1],mat[,3], mat[,2], rownames(mat))
 
   rgl::lines3d(xspline,zspline,yspline,col = "orange",lwd=6)
