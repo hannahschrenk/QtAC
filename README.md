@@ -24,6 +24,15 @@ source("install_packages_QtAC.R")
 install.packages("QtAC_1.0.tar.gz", repos = NULL, type = "source")
 library(QtAC)
 ```
+EXAMPLE DESCRIPTION:
+
+We provide an example application of QtAC to a SIHUMI community (simplified human intestinal microbiota, Becker et al. 2010). It is based on time series of abundance data of seven bacterial species, which has been simulated using BacArena (Bauer et al. 2017). Each row of the tab-separated file "QtAC_SIHUMI.txt" contains the number of individuals of one of the species at 40 subsequent simulation steps. The name of the respective species is specified in the first column. Following "QtAC_SIHUMI.R", the user exemplarily learns how to estimate a series of information networks from abundance data and how to compute the corresponding systemic variables. Several ways of visualizing the results are illustrated. 
+
+RUN EXAMPLE:
+* Access folder "Example"
+* Download "QtAC_SIHUMI.txt"
+* Follow instructions in "QtAC_SIHUMI.R"
+
 SUPPLEMENTARY MATERIAL:
 
 The QtAC folder contains a manual "QtAC_0.1.0.pdf" describing the main functions. Additionally required packages can be installed via "install_packages_QtAC.R". An example application to a bacterial community can be found in the subfolder "Example". The subfolder "dist" contains the file "MTinfodynamics.jar" which is necessary to run the main function QtAC. 
