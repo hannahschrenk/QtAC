@@ -8,6 +8,7 @@ QtAC(
   data,
   num_timepoints,
   javapath,
+  noise_level = "1e-20",
   num_permcheck = 1000L,
   k = 1L,
   k_tau = 1L,
@@ -23,6 +24,12 @@ QtAC(
 
 \item{num_timepoints}{length of the time windows of abundance data serving as basis of the transfer entropy estimations}
 
+\item{javapath}{path of the file "MTinfodynamics.jar"}
+
+\item{noise_level}{amount of random Gaussian noise added in the estimation}
+
+\item{num_permcheck}{number of surrogate samples to bootstrap to generate the distribution in the significance test}
+
 \item{k}{embedding length of destination past history to consider}
 
 \item{k_tau}{embedding delay for the destination variable}
@@ -34,10 +41,6 @@ QtAC(
 \item{delay}{time lag between last element of source and destination next value}
 
 \item{save}{If save=TRUE, the output is saved in a file called filename.}
-
-\item{JavaPath}{path of the file "infodynamics.jar"}
-
-\item{num_PermCheck}{number of surrogate samples to bootstrap to generate the distribution in the significance test}
 }
 \value{
 list of two lists (adjacency and corresponding significance matrices)

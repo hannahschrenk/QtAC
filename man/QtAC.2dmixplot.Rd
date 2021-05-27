@@ -27,5 +27,5 @@ QtAC.2dmixplot(
 2D plot and, if Save = TRUE, a PNG file containing the plot
 }
 \description{
-This function plots two selected systemic variables w.r.t. each other. A curve interpolated via a piecewise cubic spline.
+This function plots two selected systemic variables w.r.t. each other. A curve is interpolated via a piecewise cubic spline.
 }
