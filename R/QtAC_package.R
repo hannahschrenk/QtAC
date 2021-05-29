@@ -11,7 +11,7 @@
 # 09.07.2019        fixing documentation of functions
 # 22.07.2019        version 1.0 of the package
 # 08.09.2020	    polishing functions and descriptions
-#
+# 27.05.2021      adding parameter noise_level, changing descriptions
 #-------------------------------------------------------
 # Packages needed:
 
@@ -19,8 +19,6 @@
 # library("rJava")
 # library("igraph")
 # library("rgl")
-
-# "Perl" is necessary as well. You can download it from https://www.perl.org/get.html.
 
 #-------------------------------------------------------
 # OVERVIEW ABOUT THE FUNCTIONS:
@@ -92,8 +90,9 @@ QtAC.TXT.reader <- function(filename,col_names=FALSE,row_names=FALSE){
 #' @export
 #' @param data data array containing time series of the system's components' abundance data
 #' @param num_timepoints length of the time windows of abundance data serving as basis of the transfer entropy estimations
-#' @param JavaPath path of the file "infodynamics.jar"
-#' @param num_PermCheck number of surrogate samples to bootstrap to generate the distribution in the significance test
+#' @param javapath path of the file "MTinfodynamics.jar"
+#' @param noise_level amount of random Gaussian noise added in the estimation
+#' @param num_permcheck number of surrogate samples to bootstrap to generate the distribution in the significance test
 #' @param k embedding length of destination past history to consider
 #' @param k_tau embedding delay for the destination variable
 #' @param l embedding length of source past history to consider
@@ -104,7 +103,7 @@ QtAC.TXT.reader <- function(filename,col_names=FALSE,row_names=FALSE){
 # @examples
 # result_mtx <- QtAC(Data,num_timepoints=6,JavaPath = "D:/Users/max.mustermann/Desktop/infoDynamics.jar",num_PermCheck=500)
 
-QtAC <- function(data, num_timepoints,javapath,num_permcheck=1000L,k=1L,k_tau=1L,l=1L,l_tau=1L,delay=1L, save = FALSE, filename = "result_QtAC"){
+QtAC <- function(data,num_timepoints,javapath,noise_level = "1e-20",num_permcheck=1000L,k=1L,k_tau=1L,l=1L,l_tau=1L,delay=1L, save = FALSE, filename = "result_QtAC"){
 
 
   Data1 <- t(data)
@@ -126,7 +125,7 @@ QtAC <- function(data, num_timepoints,javapath,num_permcheck=1000L,k=1L,k_tau=1L
     significance_matrices <- list()
 
     for (num_dataset in 1:length(DataSet)){
-      adj_sign <- .QtAC.Kraskov(DataSet[[num_dataset]],num_species,num_permcheck,k,k_tau,l,l_tau,delay, rownames(data),JavaPath = javapath)
+      adj_sign <- .QtAC.Kraskov(DataSet[[num_dataset]],num_species,noise_level,num_permcheck,k,k_tau,l,l_tau,delay, rownames(data),JavaPath = javapath)
       adjacency_matrices[[num_dataset]] <- adj_sign[[1]]
       significance_matrices[[num_dataset]] <- adj_sign[[2]]
 
@@ -189,13 +188,13 @@ QtAC <- function(data, num_timepoints,javapath,num_permcheck=1000L,k=1L,k_tau=1L
 #--------------------------Kraskov-------------------------
 # This function computes the transfer entropy between two species and stores it in an adjacency matrix. The significance of the results is computed as well and stored in a significance matrix. The return will be a list of two elements, the adjacency and the significance matrix.
 
-.QtAC.Kraskov <- function(Submatrix,num_species,num_PermCheck,k,k_tau,l,l_tau,delay, names_sp,JavaPath){
+.QtAC.Kraskov <- function(Submatrix,num_species,noise_level,num_PermCheck,k,k_tau,l,l_tau,delay, names_sp,JavaPath){
 
   rJava::.jinit()
   rJava::.jaddClassPath(JavaPath)
   Submtx_java <- rJava::.jarray(Submatrix, dispatch = TRUE)
   teCalc<-rJava::.jnew("mtinfodynamics/RunTransferEntropyCalculatorKraskov")
-  rJava::.jcall(teCalc,"V","setProperty", "NOISE_LEVEL_TO_ADD", "0")
+  rJava::.jcall(teCalc,"V","setProperty", "NOISE_LEVEL_TO_ADD", noise_level)
   rJava::.jcall(teCalc,"V","initialise",k,k_tau,l,l_tau,delay,num_PermCheck)
   rJava::.jcall(teCalc,"V","runTEKraskov",Submtx_java)
   result_Adj <-  rJava::.jcall(teCalc,"[[D",method = "getResults")
@@ -827,7 +826,7 @@ QtAC.2dplot <- function(mat,prop = NULL, time_int = NULL, time = "time", save = 
 #-------------------------------------------------------------------
 #' 2dmixplot
 #'
-#' This function plots two selected systemic variables w.r.t. each other. A curve interpolated via a piecewise cubic spline.
+#' This function plots two selected systemic variables w.r.t. each other. A curve is interpolated via a piecewise cubic spline.
 #' @export
 #' @param Mat data frame containing a time series of systemic variables
 #' @param prop1 variable on x-axis ("potential","connectedness","resilience")
