@@ -46,7 +46,7 @@ install.packages("pracma")
 install.packages("plotrix")
 ```
    6. Install QtAC package:
-   * download the file [QtAC_X.X.X.tar.gz](https://github.com/hannahschrenk/QtAC/blob/master/QtAC_0.1.1.tar.gz)
+   * clone the project or download the file [QtAC_X.X.X.tar.gz](https://github.com/hannahschrenk/QtAC/blob/master/QtAC_0.1.1.tar.gz)
    * in the internal console type:
 ```R
 getwd()
@@ -78,11 +78,43 @@ install.packages("plotrix")
 install.packages("rgl")
 ```
    * install QtAC package:
+   * clone the project or download the file [QtAC_X.X.X.tar.gz](https://github.com/hannahschrenk/QtAC/blob/master/QtAC_0.1.1.tar.gz)
 ```R
 install.packages("C:/path_to_the_package/QtAC_X.X.X.tar.gz",repos = NULL,type="source")
 ```
 
-### macOS (XX.XX):
+### macOS (Monterey):
+   1. Install R-4.1.2-win (https://cran.rstudio.com/bin/macosx/base/R-4.1.2.pkg)
+   2. Install java jdk-11 (https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.13%2B8/OpenJDK11U-jdk_x64_mac_hotspot_11.0.13_8.pkg)
+   3. Install XQuartz (https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg)
+   4. Install RStudio (recommended, https://download1.rstudio.org/desktop/macos/RStudio-2021.09.1-372.dmg)
+   5. Configuring java for R:<br>
+   * open a terminal and copy and paste
+```console
+R CMD javareconf
+```
+   6. Run RStudio and copy and paste in the internal console:<br>
+```R
+install.packages("Cairo")
+install.packages("png")
+install.packages("shiny")
+install.packages("rJava")
+install.packages("igraph")
+install.packages("rgl")
+install.packages("pracma")
+install.packages("plotrix")
+```
+   7.  Install QtAC package:
+   * clone the project or download the file [QtAC_X.X.X.tar.gz](https://github.com/hannahschrenk/QtAC/blob/master/QtAC_0.1.1.tar.gz)
+   * in the internal console type:
+```R
+getwd()
+```
+   * then move the QtAC_X.X.X.tar.gz to that folder
+   * install QtAC:
+```R
+install.packages("QtAC_X.X.X.tar.gz", repos = NULL, type="source")
+```
 
 ------
 
