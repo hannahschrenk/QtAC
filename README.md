@@ -106,15 +106,12 @@ install.packages("plotrix")
 ```
    7.  Install QtAC package:
    * clone the project or download the file [QtAC_X.X.X.tar.gz](https://github.com/hannahschrenk/QtAC/blob/master/QtAC_0.1.1.tar.gz)
-   * in the internal console type:
-```R
-getwd()
-```
-   * then move the QtAC_X.X.X.tar.gz to that folder
    * install QtAC:
 ```R
-install.packages("QtAC_X.X.X.tar.gz", repos = NULL, type="source")
+install.packages("/path_to_the_package/QtAC_X.X.X.tar.gz", repos = NULL, type="source")
 ```
+   * Or with RStudio go to:<br>
+  Tools -> Install Packages -> select "Package Archive File (.tar.gz)" -> install
 
 ------
 

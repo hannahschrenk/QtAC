@@ -35,7 +35,7 @@ In linux you have to add sudo before docker!
 
 ### Linux (Ubuntu):
 * Download one time the image from Docker Hub. In a terminal copy and paste the following line:<br>
-`docker pull hannahschrenk/qtac:latest`<span style="color:red;"><strong>(CHANGE)</strong></span>
+`docker pull hannahschrenk/qtac:latest`
 
 * Run the container: The downloaded image contains a example dataset to test the features of the package.<br>
 ```console
@@ -50,11 +50,11 @@ The container will pop an R terminal where we can start using the QtAC package.
 
 ### Windows 10/11:
 * Download one time the image from Docker Hub. In a terminal copy and paste the following line:<br>
-`docker pull hannahschrenk/qtac:latest`<span style="color:red;"><strong>(CHANGE)</strong></span>
+`docker pull hannahschrenk/qtac:latest`
 
 ### macOS (XX.XX):
 * Download one time the image from Docker Hub. In a terminal copy and paste the following line:<br>
-`docker pull hannahschrenk/qtac:latest`<span style="color:red;"><strong>(CHANGE)</strong></span>
+`docker pull hannahschrenk/qtac:latest`
 
 Copy and paste.<br>
 
