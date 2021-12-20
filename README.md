@@ -116,7 +116,7 @@ install.packages("/path_to_the_package/QtAC_X.X.X.tar.gz", repos = NULL, type="s
 ------
 
 **NOTE**<br>
-In case of error in the rgl package installation please install this packages (Win/Linux/Mac):<br>
+In case of error in the rgl package installation please install these packages (Win/Linux/Mac):<br>
 ```R
 remotes::install_github(c("rstudio/webshot2", "rstudio/chromote", "r-lib/pkgdown"))
 ```
