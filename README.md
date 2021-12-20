@@ -115,6 +115,14 @@ install.packages("/path_to_the_package/QtAC_X.X.X.tar.gz", repos = NULL, type="s
 
 ------
 
+**NOTE**<br>
+In case of error in the rgl package installation please install this packages (Win/Linux/Mac):<br>
+```R
+remotes::install_github(c("rstudio/webshot2", "rstudio/chromote", "r-lib/pkgdown"))
+```
+
+------
+
 ## Ready to use (Docker Optional)
 These instructions will get you running the QtAC package in a Docker container.<br>
 The easiest way to use the package is trough the QtAC Docker image. Follow the instructions [here](docker.md) to install Docker and run the QtAC package in your local machine.<br>
@@ -195,4 +203,3 @@ Hannah Schrenk and Wolfgang zu Castell
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
