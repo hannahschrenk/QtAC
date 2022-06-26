@@ -51,6 +51,9 @@ result_mtx_sig <- QtAC.signfactor(result_mtx,signfac)
 
 maturation <- QtAC.maturation(result_mtx_sig)
 
+# Note: If you want to compute the maturation of a general list L of adjacency matrices,
+# use QtAC.maturation(list(L,list())).
+
 #----------------------------------------------------------------------------------------------#
 # VISUALIZATIONS
 
