@@ -9,7 +9,7 @@ QtAC provides tools to analyze the maturation process of complex systems in the 
 
 ## ESSENTIAL SOFTWARE:
 * QtAC package
-* MTinfodynamics.jar (inside dist folder)
+* folder "dist" (it is essential to keep the inner folder structure since the paths in MTinfodynamics.jar are based on it) 
 * java-jdk-11 (https://www.oracle.com/java/technologies/downloads/)
 * R (https://cran.r-project.org/index.html)
 * RStudio (optional, https://www.rstudio.com/products/rstudio/download/)
