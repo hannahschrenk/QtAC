@@ -6,7 +6,7 @@
 \usage{
 QtAC.network(
   result_mtx,
-  num_mtx,
+  num_mtx = 1,
   edge_label = FALSE,
   dec = 2,
   layout = "nicely",
@@ -23,7 +23,7 @@ QtAC.network(
 \arguments{
 \item{result_mtx}{list of adjacency matrices and significance matrices}
 
-\item{num_mtx}{number of the adjacency matrix you want to plot}
+\item{num_mtx}{number of the adjacency matrix you want to plot (default = 1)}
 
 \item{edge_label}{If edge_label = TRUE, the weight of the edges are plotted next to the edges.}
 
