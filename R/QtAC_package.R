@@ -416,7 +416,7 @@ QtAC_AIS <- function(data,num_timepoints,javapath,noise_level = "1e-20",num_perm
    	# Calculation of AIS and significance values:
 
 	rJava::.jinit()
-	rJava::.jaddClassPath(infodyn_path)
+	rJava::.jaddClassPath(javapath)
 
 	Submatrix <- DataSet[[1]]
 
